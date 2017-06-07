@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  zabbix-agent-1:
+    image: akomic/zbx-pgsql-agent:v1
+    container_name: idea-db
+    ports:
+      - "20050:10050"
+    environment:
+      - PG_LINE=hostname:port:database:username:password
+      - SERVER_IP=127.0.0.1
+      - HOST_NAME=idea-db
+    network_mode: host
+  zabbix-agent-2:
+    image: akomic/zbx-pgsql-agent:v1
+    container_name: test-db
+    ports:
+      - "20051:10050"
+    environment:
+      - PG_LINE=hostname:port:database:username:password
+      - SERVER_IP=127.0.0.1
+      - HOST_NAME=test-db
+    network_mode: host
